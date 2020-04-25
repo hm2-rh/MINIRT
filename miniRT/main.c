@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hrhirha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/06 07:50:14 by hrhirha           #+#    #+#             */
-/*   Updated: 2020/03/11 17:19:32 by hrhirha          ###   ########.fr       */
+/*   Created: 2020/04/23 09:50:42 by hrhirha           #+#    #+#             */
+/*   Updated: 2020/04/23 09:50:47 by hrhirha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,11 @@ void	start(t_data *data)
 {
 	cams_circle(&data->cams);
 	data->ptr = mlx_init();
-	data->win = mlx_new_window(data->ptr, data->res.w, data->res.h, "my very first RayTracer");
+	data->win = mlx_new_window(data->ptr, data->res.w, data->res.h,
+								"RayTracer");
 	data->img = mlx_new_image(data->ptr, data->res.w, data->res.h);
-	data->addr = mlx_get_data_addr(data->img, &data->bpp, &data->line_len, &data->endian);
+	data->addr = mlx_get_data_addr(data->img, &data->bpp, &data->line_len,
+									&data->endian);
 	ray_trace(data);
 	if (data->save == 1)
 	{
@@ -58,10 +60,10 @@ void	start(t_data *data)
 	}
 }
 
-int	open_file(char *s)
+int		open_file(char *s)
 {
 	int fd;
-	
+
 	fd = open(s, O_RDONLY);
 	if (fd < 0)
 	{

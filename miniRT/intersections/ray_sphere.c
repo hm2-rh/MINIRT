@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ray_sphere.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hrhirha <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/04/23 09:54:13 by hrhirha           #+#    #+#             */
+/*   Updated: 2020/04/23 09:54:15 by hrhirha          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minirt.h"
 
 double	g_a;
@@ -20,9 +32,9 @@ double	sphere_intersect(t_ray ray, t_sp sp)
 		return (-1);
 	g_t1 = (-g_b - sqrt(g_disc)) / 2 * g_a;
 	g_t2 = (-g_b + sqrt(g_disc)) / 2 * g_a;
-	if (g_t2 < 0)
+	if (g_t2 < T_MIN)
 		return (-1);
-	if (g_t1 > 0)
+	if (g_t1 > T_MIN)
 		g_t = g_t1;
 	else
 		g_t = g_t2;

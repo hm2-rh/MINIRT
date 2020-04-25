@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   intersections.h                                    :+:      :+:    :+:   */
+/*   intersections.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hrhirha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/06 17:51:07 by hrhirha           #+#    #+#             */
-/*   Updated: 2020/03/11 17:19:36 by hrhirha          ###   ########.fr       */
+/*   Created: 2020/04/23 09:54:02 by hrhirha           #+#    #+#             */
+/*   Updated: 2020/04/23 09:54:05 by hrhirha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ double	first_inter(t_data *data, t_vec *inter_pt, t_vec *n, t_vec *col)
 		if (((t_sq *)data->curr_shape)->id == SQ)
 			;
 		if (((t_cy *)data->curr_shape)->id == CY)
-			;
+			closest_cy(data, inter_pt, n, col);
 		tmp = tmp->next;
 	}
 	if (data->t_min == T_MAX)

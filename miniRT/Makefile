@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: hrhirha <marvin@42.fr>                     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2020/04/23 09:54:42 by hrhirha           #+#    #+#              #
+#    Updated: 2020/04/23 15:49:41 by hrhirha          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = minirt
 LIBFT = libft/libft.a
 CC = clang -Wall -Wextra -Werror -g -fsanitize=address
@@ -12,6 +24,7 @@ SRCS =	main.c \
 		ray_trace.c \
 		read_fd.c \
 		vector_math.c \
+		vector_math2.c \
 		errors.c \
 		gnl/get_next_line.c \
 		bmp.c

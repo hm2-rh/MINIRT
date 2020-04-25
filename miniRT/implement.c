@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   implement.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hrhirha <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/04/23 09:53:26 by hrhirha           #+#    #+#             */
+/*   Updated: 2020/04/23 09:53:30 by hrhirha          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 void	implement_res(char *line, t_res *res)
@@ -115,8 +127,8 @@ void	implement_shapes(char *line, t_list **shapes)
 	if (line[0] == 't' && line[1] == 'r')
 		implement_tr(tab, shapes);
 	if (line[0] == 'c' && line[1] == 'y')
-		;
+		implement_cy(tab, shapes);
 	if (line[0] == 's' && line[1] == 'q')
-		;
+		implement_sq(tab, shapes);
 	free_tab(tab);
 }

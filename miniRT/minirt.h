@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rt.h                                               :+:      :+:    :+:   */
+/*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hrhirha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/06 18:29:11 by hrhirha           #+#    #+#             */
-/*   Updated: 2020/03/11 17:19:34 by hrhirha          ###   ########.fr       */
+/*   Created: 2020/04/23 09:55:00 by hrhirha           #+#    #+#             */
+/*   Updated: 2020/04/23 09:55:04 by hrhirha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include "libft/libft.h"
 # include "gnl/get_next_line.h"
 
-# define T_MIN 0.0001
+# define T_MIN 0.000001
 # define T_MAX 1.0e100
 
 # define SP 1
@@ -121,7 +121,7 @@ typedef	struct	s_cy
 	int			id;
 	t_vec		pos;
 	t_vec		normal;
-	double		diam;
+	double		radius;
 	double		height;
 	t_vec		color;
 }				t_cy;
@@ -194,11 +194,13 @@ int				save_image(t_data *data, int x, int y);
 double			sphere_intersect(t_ray ray, t_sp sp);
 double			plane_intersect(t_ray ray, t_plane pl);
 double			triangle_intersect(t_ray ray, t_tr tr);
+double			cylinder_intersect(t_ray ray, t_cy cy);
 double			first_inter(t_data *data, t_vec *inter_pt, t_vec *n,
 							t_vec *col);
 void			closest_sp(t_data *data, t_vec *inter_pt, t_vec *n, t_vec *col);
 void			closest_pl(t_data *data, t_vec *inter_pt, t_vec *n, t_vec *col);
 void			closest_tr(t_data *data, t_vec *inter_pt, t_vec *n, t_vec *col);
+void			closest_cy(t_data *data, t_vec *inter_pt, t_vec *n, t_vec *col);
 
 /*
 ** color clac
@@ -246,6 +248,8 @@ void			implement_shapes(char *line, t_list **shapes);
 void			implement_sp(char **tab, t_list **shapes);
 void			implement_pl(char **tab, t_list **shapes);
 void			implement_tr(char **tab, t_list **shapes);
+void			implement_sq(char **tab, t_list **shapes);
+void			implement_cy(char **tab, t_list **shapes);
 
 /*
 ** utils

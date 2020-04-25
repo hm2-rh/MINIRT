@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bmp.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hrhirha <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/04/23 09:52:26 by hrhirha           #+#    #+#             */
+/*   Updated: 2020/04/23 09:52:32 by hrhirha          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 #include <time.h>
 
@@ -40,12 +52,12 @@ void	write_header(const int fd, t_bmp *bmp)
 	write(fd, &(bmp->imp_colour), 4);
 }
 
-char	*get_current_time_name()
+char	*get_current_time_name(void)
 {
 	time_t		t;
 	struct tm	*info;
 	size_t		str_len;
-	char 		*str;
+	char		*str;
 
 	time(&t);
 	info = localtime(&t);
