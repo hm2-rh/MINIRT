@@ -59,3 +59,14 @@ int		check_errors(char **tab)
 	}
 	return (-1);
 }
+
+void	normal_error(t_vec normal)
+{
+	if ((normal.x < -1 || normal.x > 1) ||
+		(normal.y < -1 || normal.y > 1) ||
+		(normal.z < -1 || normal.z > 1))
+	{
+		ft_putstr_fd("Error\nnormal vector coordinates should be between -1 and 1\n", 1);
+		exit (-1);
+	}
+}

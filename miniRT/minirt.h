@@ -21,7 +21,7 @@
 # include "libft/libft.h"
 # include "gnl/get_next_line.h"
 
-# define T_MIN 0.000001
+# define T_MIN 0.00001
 # define T_MAX 1.0e100
 
 # define SP 1
@@ -120,6 +120,7 @@ typedef	struct	s_cy
 {
 	int			id;
 	t_vec		pos;
+	t_vec		pos2;
 	t_vec		normal;
 	double		radius;
 	double		height;
@@ -217,6 +218,7 @@ int				rgb_to_int(t_color c);
 void			print_info_error(char *s);
 void			print_load_error(t_data *data);
 int				check_errors(char **tab);
+void		normal_error(t_vec normal);
 
 /*
 ** extract data from string

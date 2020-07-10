@@ -32,6 +32,7 @@ void	implement_pl(char **tab, t_list **shapes)
 	pl->id = PL;
 	pl->ref = ext_vec(tab[1]);
 	pl->normal = ext_vec(tab[2]);
+	normal_error(pl->normal);
 	pl->color = ext_color_ratio(tab[3]);
 	ft_lstadd_back(shapes, ft_lstnew(pl));
 }
@@ -59,9 +60,11 @@ void	implement_cy(char **tab, t_list **shapes)
 	cy->id = CY;
 	cy->pos = ext_vec(tab[1]);
 	cy->normal = ext_vec(tab[2]); 
+	normal_error(cy->normal);
 	cy->radius = ft_atolf(tab[3]) / 2.0;
 	cy->height = ft_atolf(tab[4]);
 	cy->color = ext_color_ratio(tab[5]);
+	cy->pos2 = addvec(cy->pos, mulvec(cy->height, cy->normal));
 	ft_lstadd_back(shapes, ft_lstnew(cy));
 }
 

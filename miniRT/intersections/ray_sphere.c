@@ -25,13 +25,13 @@ double	sphere_intersect(t_ray ray, t_sp sp)
 {
 	g_rs = subvec(ray.start, sp.center);
 	g_a = dot(ray.dir, ray.dir);
-	g_b = 2 * dot(ray.dir, g_rs);
+	g_b = dot(ray.dir, g_rs);
 	g_c = dot(g_rs, g_rs) - (sp.radius * sp.radius);
-	g_disc = g_b * g_b - 4 * g_a * g_c;
+	g_disc = g_b * g_b - g_a * g_c;
 	if (g_disc < 0)
 		return (-1);
-	g_t1 = (-g_b - sqrt(g_disc)) / 2 * g_a;
-	g_t2 = (-g_b + sqrt(g_disc)) / 2 * g_a;
+	g_t1 = (-g_b - sqrt(g_disc)) / g_a;
+	g_t2 = (-g_b + sqrt(g_disc)) / g_a;
 	if (g_t2 < T_MIN)
 		return (-1);
 	if (g_t1 > T_MIN)
