@@ -104,6 +104,9 @@ void	implement_cameras(char *line, t_list **cams)
 	cam->pos = ext_vec(tab[1]);
 	cam->dir = ext_vec(tab[2]);
 	cam->fov = ft_atolf(tab[3]);
+	if ((cam->dir.x == 0 && cam->dir.y == 1 && cam->dir.z == 0) ||
+		(cam->dir.x == 0 && cam->dir.y == -1 && cam->dir.z == 0))
+		down_guide = (t_vec){0, 0, 1};
 	cam->right = cross(down_guide, cam->dir);
 	cam->down = cross(cam->dir, cam->right);
 	ft_lstadd_back(cams, ft_lstnew(cam));

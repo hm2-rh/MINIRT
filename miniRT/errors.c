@@ -6,7 +6,7 @@
 /*   By: hrhirha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/23 09:51:21 by hrhirha           #+#    #+#             */
-/*   Updated: 2020/04/23 09:51:36 by hrhirha          ###   ########.fr       */
+/*   Updated: 2020/10/14 10:11:16 by hrhirha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ void	normal_error(t_vec normal)
 		(normal.y < -1 || normal.y > 1) ||
 		(normal.z < -1 || normal.z > 1))
 	{
-		ft_putstr_fd("Error\nnormal vector coordinates should be between -1 and 1\n", 1);
-		exit (-1);
+		ft_putstr_fd("Error\nnormal vector coordinates \
+				should be between -1 and 1\n", 1);
+		exit(-1);
 	}
 }

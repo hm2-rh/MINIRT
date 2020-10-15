@@ -6,7 +6,7 @@
 /*   By: hrhirha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/23 09:55:00 by hrhirha           #+#    #+#             */
-/*   Updated: 2020/04/23 09:55:04 by hrhirha          ###   ########.fr       */
+/*   Updated: 2020/10/14 12:22:49 by hrhirha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 
 # define T_MIN 0.00001
 # define T_MAX 1.0e100
+
+# define ESC_KEY	53
+# define SP_KEY		49
 
 # define SP 1
 # define PL 2
@@ -127,15 +130,24 @@ typedef	struct	s_cy
 	t_vec		color;
 }				t_cy;
 
+typedef	struct	s_img
+{
+	void			*img;
+	char			*addr;
+	int				bpp;
+	int				line_len;
+	int				endian;
+}				t_img;
+
+
 typedef	struct	s_data
 {
+	char		*bmp_name;
+
 	void		*win;
 	void		*ptr;
-	void		*img;
-	char		*addr;
-	int			bpp;
-	int			line_len;
-	int			endian;
+	t_list		*imgs;
+	t_img		*curr_img;
 
 	int			save;
 
@@ -185,6 +197,7 @@ typedef struct	s_bmp
 }				t_bmp;
 
 void			read_fd(int fd, t_data *data);
+void			render_scenes(t_data *data);
 void			ray_trace(t_data *data);
 int				save_image(t_data *data, int x, int y);
 
@@ -257,6 +270,8 @@ void			implement_cy(char **tab, t_list **shapes);
 ** utils
 */
 
+int				keys(int key, t_data *data);
+void			lst_circle(t_list **imgs);
 void			free_tab(char **tab);
 int				tab_len(char **tab);
 int				is_whitespace(int c);

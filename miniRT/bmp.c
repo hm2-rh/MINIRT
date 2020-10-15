@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "minirt.h"
-#include <time.h>
 
 void	set_bmp(t_bmp *bmp, t_data *data)
 {
@@ -52,36 +51,17 @@ void	write_header(const int fd, t_bmp *bmp)
 	write(fd, &(bmp->imp_colour), 4);
 }
 
-char	*get_current_time_name(void)
-{
-	time_t		t;
-	struct tm	*info;
-	size_t		str_len;
-	char		*str;
-
-	time(&t);
-	info = localtime(&t);
-	str = ft_strdup("screenshot_");
-	str_len = strftime(str + 11, 39, "%F-%T", info);
-	return (str);
-}
-
 int		save_image(t_data *data, int x, int y)
 {
 	t_bmp	bmp;
 	int		fd;
 	char	*add;
-	char	*name;
-	char 	*tmp;
 
 	ft_putstr_fd("Saving...\n", 0);
-	add = (char *)data->addr;
+	add = (char *)data->curr_img->addr;
 	set_bmp(&bmp, data);
-	tmp = get_current_time_name();
-	name = ft_strjoin(tmp, ".bmp");
-	fd = open(name, O_CREAT | O_WRONLY | O_TRUNC, 0666);
-	free(tmp);
-	free(name);
+	data->bmp_name = ft_strjoin(data->bmp_name, ".bmp");
+	fd = open(data->bmp_name, O_CREAT | O_WRONLY | O_TRUNC, 0666);
 	write_header(fd, &bmp);
 	y = data->res.h - 1;
 	while (y >= 0)
