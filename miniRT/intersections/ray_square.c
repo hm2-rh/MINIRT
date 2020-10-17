@@ -1,39 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray_plane.c                                        :+:      :+:    :+:   */
+/*   ray_square.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hrhirha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/23 09:54:21 by hrhirha           #+#    #+#             */
-/*   Updated: 2020/04/23 09:54:23 by hrhirha          ###   ########.fr       */
+/*   Created: 2020/10/17 10:19:31 by hrhirha           #+#    #+#             */
+/*   Updated: 2020/10/17 10:19:33 by hrhirha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minirt.h"
 
-double	plane_intersect(t_ray ray, t_plane pl)
+double	square_intersect(t_ray ray, t_sq sq)
 {
-	double denom;
-	double t;
+	double	t;
+	double	denom;
 
-	denom = dot(ray.dir, pl.normal);
+	denom = dot(ray.dir, sq.normal);
 	if (denom >= 0)
 		return (-1);
-	t = dot(subvec(pl.ref, ray.start), pl.normal) / denom;
+	t = dot(subvec(sq.center, ray.start), sq.normal) / denom;
 	return (t);
 }
 
-void	closest_pl(t_data *data, t_vec *inter_pt, t_vec *n, t_vec *col)
+void    closest_sq(t_data *data, t_vec *inter_pt, t_vec *n, t_vec *col)
 {
-	double t;
+	double	t;
+	t_sq	sq;
 
-	t = plane_intersect(data->ray, *((t_plane *)data->curr_shape));
-	if (t != -1 && t < data->t_min)
+	sq = *(t_sq *)data->curr_shape;
+	t = square_intersect(data->ray, sq);
+	if (t < data->t_min)
 	{
-		*col = ((t_plane *)data->curr_shape)->color;
 		data->t_min = t;
+		*col = sq.color;
 		*inter_pt = addvec(data->ray.start, mulvec(t, data->ray.dir));
-		*n = ((t_plane *)data->curr_shape)->normal;
+		*n = sq.normal;
 	}
 }

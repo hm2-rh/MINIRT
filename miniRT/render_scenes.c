@@ -72,6 +72,11 @@ void	render_scenes(t_data *data)
 		printf("rendering scene %d\n", i++);
 		data->curr_img = (t_img *)(tmp_img->content);
 		ray_trace(data);
+		if (data->save == 1)
+		{
+			save_image(data, 0, 0);
+			exit(EXIT_SUCCESS);
+		}
 		data->cams = data->cams->next;
 		tmp_img = tmp_img->next;
 	}

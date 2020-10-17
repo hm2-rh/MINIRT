@@ -60,7 +60,8 @@ int		save_image(t_data *data, int x, int y)
 	ft_putstr_fd("Saving...\n", 0);
 	add = (char *)data->curr_img->addr;
 	set_bmp(&bmp, data);
-	data->bmp_name = ft_strjoin(data->bmp_name, ".bmp");
+	// data->bmp_name = ft_strjoin(data->bmp_name, ".bmp");
+	data->bmp_name = "image.bmp";
 	fd = open(data->bmp_name, O_CREAT | O_WRONLY | O_TRUNC, 0666);
 	write_header(fd, &bmp);
 	y = data->res.h - 1;

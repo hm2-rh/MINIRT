@@ -28,7 +28,7 @@ double	first_inter(t_data *data, t_vec *inter_pt, t_vec *n, t_vec *col)
 		if (((t_tr *)data->curr_shape)->id == TR)
 			closest_tr(data, inter_pt, n, col);
 		if (((t_sq *)data->curr_shape)->id == SQ)
-			;
+			closest_sq(data, inter_pt, n, col);
 		if (((t_cy *)data->curr_shape)->id == CY)
 			closest_cy(data, inter_pt, n, col);
 		tmp = tmp->next;

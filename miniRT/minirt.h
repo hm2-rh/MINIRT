@@ -205,16 +205,18 @@ int				save_image(t_data *data, int x, int y);
 ** intersections
 */
 
-double			sphere_intersect(t_ray ray, t_sp sp);
-double			plane_intersect(t_ray ray, t_plane pl);
-double			triangle_intersect(t_ray ray, t_tr tr);
-double			cylinder_intersect(t_ray ray, t_cy cy);
 double			first_inter(t_data *data, t_vec *inter_pt, t_vec *n,
 							t_vec *col);
 void			closest_sp(t_data *data, t_vec *inter_pt, t_vec *n, t_vec *col);
 void			closest_pl(t_data *data, t_vec *inter_pt, t_vec *n, t_vec *col);
 void			closest_tr(t_data *data, t_vec *inter_pt, t_vec *n, t_vec *col);
+void			closest_sq(t_data *data, t_vec *inter_pt, t_vec *n, t_vec *col);
 void			closest_cy(t_data *data, t_vec *inter_pt, t_vec *n, t_vec *col);
+double			sphere_intersect(t_ray ray, t_sp sp);
+double			plane_intersect(t_ray ray, t_plane pl);
+double			triangle_intersect(t_ray ray, t_tr tr);
+double			square_intersect(t_ray ray, t_sq sq);
+double			cylinder_intersect(t_ray ray, t_cy cy);
 
 /*
 ** color clac
