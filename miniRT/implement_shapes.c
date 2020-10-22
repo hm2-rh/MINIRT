@@ -33,6 +33,7 @@ void	implement_pl(char **tab, t_list **shapes)
 	pl->ref = ext_vec(tab[1]);
 	pl->normal = ext_vec(tab[2]);
 	normal_error(pl->normal);
+	pl->normal = normalize(pl->normal);
 	pl->color = ext_color_ratio(tab[3]);
 	ft_lstadd_back(shapes, ft_lstnew(pl));
 }
@@ -59,8 +60,9 @@ void	implement_cy(char **tab, t_list **shapes)
 	cy = malloc(sizeof(t_cy));
 	cy->id = CY;
 	cy->pos = ext_vec(tab[1]);
-	cy->normal = ext_vec(tab[2]); 
+	cy->normal = ext_vec(tab[2]);
 	normal_error(cy->normal);
+	cy->normal = normalize(cy->normal);
 	cy->radius = ft_atolf(tab[3]) / 2.0;
 	cy->height = ft_atolf(tab[4]);
 	cy->color = ext_color_ratio(tab[5]);
@@ -70,12 +72,24 @@ void	implement_cy(char **tab, t_list **shapes)
 
 void	implement_sq(char **tab, t_list **shapes)
 {
-	t_sq *sq;
+	t_sq	*sq;
+	t_vec	up;
 
+	up = (t_vec){0, -1, 0};
 	sq = malloc(sizeof(t_sq));
 	sq->id = SQ;
 	sq->center = ext_vec(tab[1]);
 	sq->normal = ext_vec(tab[2]);
+	normal_error(sq->normal);
+	sq->normal = normalize(sq->normal);
+	if (sq->normal.z > 0)
+		sq->normal = invec(sq->normal);
+	if (vec_cmp(up, sq->normal) == 1 || vec_cmp(sq->normal, invec(up)) == 1)
+		up = (t_vec){0, 0, 1};
+	sq->u = cross(up, sq->normal);
+	printf("u = (%lf, %lf, %lf)\n", sq->u.x, sq->u.y, sq->u.z);
+	sq->v = cross(sq->normal, sq->u);
+	printf("v = (%lf, %lf, %lf)\n", sq->v.x, sq->v.y, sq->v.z);
 	sq->side = ft_atolf(tab[3]);
 	sq->color = ext_color_ratio(tab[4]);
 	ft_lstadd_back(shapes, ft_lstnew(sq));

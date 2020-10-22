@@ -41,3 +41,10 @@ t_vec			invec(t_vec vec)
 {
 	return ((t_vec){-vec.x, -vec.y, -vec.z});
 }
+
+int		vec_cmp(t_vec vec1, t_vec vec2)
+{
+	if (vec1.x != vec2.x || vec1.y != vec2.y || vec1.z != vec2.z)
+		return (-1);
+	return (1);
+}

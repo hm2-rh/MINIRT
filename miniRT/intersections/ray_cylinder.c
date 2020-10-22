@@ -51,7 +51,7 @@ int		intersect_disk(t_ray ray, t_cy cy, t_vec c, double *t)
 
 	normal = get_normal(c, cy);
 	denom = dot(ray.dir, normal);
-	if (denom == 0)
+	if (denom >= 0)
 		return (-1);
 	dist = dot(subvec(c, ray.start), normal) / denom;
 	if (dist < T_MIN)

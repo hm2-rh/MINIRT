@@ -67,7 +67,7 @@ t_color	calc_intensity(t_data *data, t_vec inter_pt, t_vec n)
 	while (tmp_lt)
 	{
 		data->light = tmp_lt->content;
-		data->ray_lt.start = addvec(inter_pt, mulvec(.0000001, n));
+		data->ray_lt.start = inter_pt;
 		data->ray_lt.dir = normalize(subvec(data->light->pos, inter_pt));
 		tmp = data->ray;
 		data->ray = data->ray_lt;

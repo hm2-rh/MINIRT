@@ -42,16 +42,17 @@ double	triangle_intersect(t_ray ray, t_tr tr)
 
 void	closest_tr(t_data *data, t_vec *inter_pt, t_vec *n, t_vec *col)
 {
-	double t;
+	double	t;
+	t_tr	tr;
 
-	t = triangle_intersect(data->ray, *((t_tr *)data->curr_shape));
+	tr = *(t_tr *)data->curr_shape;
+	t = triangle_intersect(data->ray, tr);
 	if (t != -1 && t < data->t_min)
 	{
-		*col = ((t_tr *)data->curr_shape)->color;
+		*col = tr.color;
 		data->t_min = t;
 		*inter_pt = addvec(data->ray.start, mulvec(t, data->ray.dir));
-		*n = normalize(cross(((t_tr *)data->curr_shape)->p0p1,
-							((t_tr *)data->curr_shape)->p0p2));
+		*n = normalize(cross(tr.p0p1, tr.p0p2));
 		if (n->z > 0)
 			*n = invec(*n);
 	}

@@ -103,9 +103,11 @@ void	implement_cameras(char *line, t_list **cams)
 	down_guide = (t_vec){0, 1, 0};
 	cam->pos = ext_vec(tab[1]);
 	cam->dir = ext_vec(tab[2]);
+	normal_error(cam->dir);
+	cam->dir = normalize(cam->dir);
 	cam->fov = ft_atolf(tab[3]);
-	if ((cam->dir.x == 0 && cam->dir.y == 1 && cam->dir.z == 0) ||
-		(cam->dir.x == 0 && cam->dir.y == -1 && cam->dir.z == 0))
+	if (vec_cmp(cam->dir, down_guide) == 1 ||
+		vec_cmp(cam->dir, invec(down_guide)) == 1)
 		down_guide = (t_vec){0, 0, 1};
 	cam->right = cross(down_guide, cam->dir);
 	cam->down = cross(cam->dir, cam->right);

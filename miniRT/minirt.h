@@ -116,6 +116,8 @@ typedef	struct	s_sq
 	t_vec		center;
 	t_vec		normal;
 	double		side;
+	t_vec		u;
+	t_vec		v;
 	t_vec		color;
 }				t_sq;
 
@@ -289,5 +291,6 @@ t_vec			subvec(t_vec v1, t_vec v2);
 t_vec			addvec(t_vec v1, t_vec v2);
 t_vec			mulvec(double n, t_vec v);
 t_vec			invec(t_vec vec);
+int				vec_cmp(t_vec vec1, t_vec vec2);
 
 #endif

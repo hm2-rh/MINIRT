@@ -43,14 +43,16 @@ double	sphere_intersect(t_ray ray, t_sp sp)
 
 void	closest_sp(t_data *data, t_vec *inter_pt, t_vec *n, t_vec *col)
 {
-	double t;
+	double	t;
+	t_sp	sp;
 
-	t = sphere_intersect(data->ray, *((t_sp *)data->curr_shape));
+	sp = *(t_sp *)data->curr_shape;
+	t = sphere_intersect(data->ray, sp);
 	if (t != -1 && t < (data->t_min))
 	{
-		*col = ((t_sp *)data->curr_shape)->color;
+		*col = sp.color;
 		data->t_min = t;
 		*inter_pt = addvec(data->ray.start, mulvec(t, data->ray.dir));
-		*n = normalize(subvec(*inter_pt, ((t_sp *)data->curr_shape)->center));
+		*n = normalize(subvec(*inter_pt, sp.center));
 	}
 }

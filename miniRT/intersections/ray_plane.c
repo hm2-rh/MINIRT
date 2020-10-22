@@ -26,14 +26,16 @@ double	plane_intersect(t_ray ray, t_plane pl)
 
 void	closest_pl(t_data *data, t_vec *inter_pt, t_vec *n, t_vec *col)
 {
-	double t;
+	double	t;
+	t_plane	pl;
 
-	t = plane_intersect(data->ray, *((t_plane *)data->curr_shape));
+	pl = *(t_plane *)data->curr_shape;
+	t = plane_intersect(data->ray, pl);
 	if (t != -1 && t < data->t_min)
 	{
-		*col = ((t_plane *)data->curr_shape)->color;
+		*col = pl.color;
 		data->t_min = t;
 		*inter_pt = addvec(data->ray.start, mulvec(t, data->ray.dir));
-		*n = ((t_plane *)data->curr_shape)->normal;
+		*n = pl.normal;
 	}
 }
