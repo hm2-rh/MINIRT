@@ -87,9 +87,7 @@ void	implement_sq(char **tab, t_list **shapes)
 	if (vec_cmp(up, sq->normal) == 1 || vec_cmp(sq->normal, invec(up)) == 1)
 		up = (t_vec){0, 0, 1};
 	sq->u = cross(up, sq->normal);
-	printf("u = (%lf, %lf, %lf)\n", sq->u.x, sq->u.y, sq->u.z);
 	sq->v = cross(sq->normal, sq->u);
-	printf("v = (%lf, %lf, %lf)\n", sq->v.x, sq->v.y, sq->v.z);
 	sq->side = ft_atolf(tab[3]);
 	sq->color = ext_color_ratio(tab[4]);
 	ft_lstadd_back(shapes, ft_lstnew(sq));

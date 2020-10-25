@@ -1,6 +1,0 @@
-#! /bin/bash
-
-make -C libft
-make bonus -C libft
-clang -lm -Wall -Wextra -Werror -g -fsanitize=address \
-0.c read_fd.c gnl/get*.c implem*.c vector_math.c  libft/libft.a; ./a.out

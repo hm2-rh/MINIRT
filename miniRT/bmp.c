@@ -76,6 +76,6 @@ int		save_image(t_data *data, int x, int y)
 		y--;
 	}
 	close(fd);
-	ft_putstr_fd("Done!\n", 0);
+	ft_putstr_fd("\033[32mDone!\n", 0);
 	return (0);
 }

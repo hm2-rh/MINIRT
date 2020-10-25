@@ -75,6 +75,9 @@ t_vec	ext_color_ratio(char *s)
 		free_tab(sub);
 		exit(-1);
 	}
+	/*
+	** check for doubles in RGB values
+	*/
 	color.x = ft_atoi(sub[0]) / 255.0;
 	color.y = ft_atoi(sub[1]) / 255.0;
 	color.z = ft_atoi(sub[2]) / 255.0;

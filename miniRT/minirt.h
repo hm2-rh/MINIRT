@@ -21,7 +21,7 @@
 # include "libft/libft.h"
 # include "gnl/get_next_line.h"
 
-# define T_MIN 0.00001
+# define T_MIN 1.0e-5
 # define T_MAX 1.0e100
 
 # define ESC_KEY	53
@@ -275,6 +275,7 @@ void			implement_cy(char **tab, t_list **shapes);
 */
 
 int				keys(int key, t_data *data);
+int     		mclose(void *data);
 void			lst_circle(t_list **imgs);
 void			free_tab(char **tab);
 int				tab_len(char **tab);

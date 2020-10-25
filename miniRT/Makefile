@@ -13,7 +13,7 @@
 NAME = minirt
 LIBFT = libft/libft.a
 MAKE_LIBFT = make -C libft/ && make bonus -C libft/
-CC = clang -Wall -Wextra -Werror -g -fsanitize=address
+CC = clang -Wall -Wextra -Werror #-g -fsanitize=address
 MLX = -lmlx -framework OpenGL -framework AppKit
 SRCS =	main.c \
 		calc_color.c \
@@ -21,6 +21,7 @@ SRCS =	main.c \
 		implement_shapes.c \
 		ext_funcs.c \
 		utils.c \
+		keys.c \
 		intersections/*.c \
 		render_scenes.c \
 		read_fd.c \

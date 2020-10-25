@@ -67,6 +67,7 @@ int		main(int ac, char **av)
 		start(&data);
 		mlx_put_image_to_window(data.ptr, data.win, data.curr_img->img, 0, 0);
 		mlx_key_hook(data.win, keys, &data);
+		mlx_hook(data.win, 17, 1L << 17, mclose, &data);
 		mlx_loop(data.ptr);
 		return (0);
 	}

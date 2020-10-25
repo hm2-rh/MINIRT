@@ -12,20 +12,6 @@
 
 #include "minirt.h"
 
-int		keys(int key, t_data *data)
-{
-	printf("%d\n", key);
-	if (key == ESC_KEY)
-		exit(EXIT_SUCCESS);
-	if (key == SP_KEY)
-	{
-		data->imgs = data->imgs->next;
-		data->curr_img = data->imgs->content;
-		mlx_put_image_to_window(data->ptr, data->win, data->curr_img->img, 0, 0);
-	}
-	return (key);
-}
-
 void	lst_circle(t_list **imgs)
 {
 	t_list *last;
