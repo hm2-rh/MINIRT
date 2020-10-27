@@ -10,14 +10,29 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-static int	ft_isspace(int c)
+#include <stdio.h>
+
+static int		ft_isspace(int c)
 {
 	if (c == ' ' || c == '\f' || c == '\n'
 			|| c == '\r' || c == '\t' || c == '\v')
 		return (1);
 	return (0);
 }
-double		ft_atolf(const char *str)
+
+static	void	floating_num(const char *str, int *i, double *flt, double *res)
+{
+	*i += 1;
+	*flt = 10;
+	while (str[*i] >= '0' && str[*i] <= '9')
+	{
+		*res += (str[*i] - 48) / *flt;
+		*flt *= 10;
+		*i += 1;
+	}
+}
+
+double			ft_atolf(const char *str)
 {
 	int			i;
 	double		flt;
@@ -36,14 +51,6 @@ double		ft_atolf(const char *str)
 	while (str[i] >= 48 && str[i] <= 57)
 		res = res * 10 + (str[i++] - 48);
 	if (str[i] == '.')
-	{
-		i++;
-		flt = 10;
-		while (str[i] >= '0' && str[i] <= '9')
-		{
-			res += (str[i++] - 48) / flt;
-			flt *= 10;
-		}
-	}
+		floating_num(str, &i, &flt, &res);
 	return (res * sign);
 }

@@ -19,11 +19,6 @@ void	start(t_data *data)
 	data->curr_img = NULL;
 	render_scenes(data);
 	data->curr_img = (t_img *)(data->imgs->content);
-	// if (data->save == 1)
-	// {
-	// 	save_image(data, 0, 0);
-	// 	exit(EXIT_SUCCESS);
-	// }
 	lst_circle(&data->imgs);
 	data->win = mlx_new_window(data->ptr, data->res.w, data->res.h,
 								"RayTracer");

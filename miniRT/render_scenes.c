@@ -16,7 +16,8 @@ void	pixel_to_img(t_data *data, int x, int y, int color)
 {
 	char *dst;
 
-	dst = data->curr_img->addr + (y * data->curr_img->line_len + x * (data->curr_img->bpp / 8));
+	dst = data->curr_img->addr + (y * data->curr_img->line_len + x *
+		(data->curr_img->bpp / 8));
 	*(unsigned int*)dst = color;
 }
 
@@ -48,25 +49,32 @@ void	ray_trace(t_data *data)
 	}
 }
 
-void	render_scenes(t_data *data)
+void	img_lst(t_data *data, t_list *tmp_cam)
 {
-	t_list	*tmp_cam;
-	t_list	*tmp_img;
-	t_img	*new_img;
+	t_img *new_img;
 
-	tmp_cam = data->cams;
 	while (tmp_cam)
 	{
 		new_img = malloc(sizeof(t_img));
 		new_img->img = mlx_new_image(data->ptr, data->res.w, data->res.h);
-		new_img->addr = mlx_get_data_addr(new_img->img, &new_img->bpp, &new_img->line_len,
-										&new_img->endian);
+		new_img->addr = mlx_get_data_addr(new_img->img, &new_img->bpp,
+										&new_img->line_len, &new_img->endian);
 		ft_lstadd_back(&data->imgs, ft_lstnew(new_img));
 		tmp_cam = tmp_cam->next;
 	}
+}
+
+void	render_scenes(t_data *data)
+{
+	t_list	*tmp_cam;
+	t_list	*tmp_img;
+	int		i;
+
+	tmp_cam = data->cams;
+	img_lst(data, tmp_cam);
 	tmp_cam = data->cams;
 	tmp_img = data->imgs;
-	int i = 0;
+	i = 0;
 	while (data->cams)
 	{
 		printf("rendering scene %d\n", i++);

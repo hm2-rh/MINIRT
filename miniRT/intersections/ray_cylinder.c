@@ -41,54 +41,17 @@ t_vec	get_normal(t_vec p, t_cy cy)
 	return (v);
 }
 
-int		intersect_disk(t_ray ray, t_cy cy, t_vec c, double *t)
+void	limit_cy(t_ray ray, t_cy cy, double *t)
 {
-	t_vec	normal;
-	double	dist;
-	double	denom;
+	double	h1;
+	double	h2;
 	t_vec	p;
-	t_vec	cp;
-
-	normal = get_normal(c, cy);
-	denom = dot(ray.dir, normal);
-	if (denom >= 0)
-		return (-1);
-	dist = dot(subvec(c, ray.start), normal) / denom;
-	if (dist < T_MIN)
-		return (-1);
-	p = addvec(ray.start, mulvec(dist, ray.dir));
-	cp = subvec(p, c);
-	if (dot(cp, cp) > cy.radius * cy.radius)
-		return (-1);
-	*t = dist;
-	return (1);
-}
-
-int		limit_cy(t_ray ray, t_cy cy, double *t)
-{
-	double	h;
-	t_vec	p;
-	double	d1;
-	double	d2;
-	int		cap1;
-	int		cap2;
 
 	p = addvec(ray.start, mulvec(*t, ray.dir));
-	h = dot(subvec(p, cy.pos), cy.normal);
-	cap1 = intersect_disk(ray, cy, cy.pos, &d1) == 1;
-	cap2 = intersect_disk(ray, cy, cy.pos2, &d2) == 1;
-	if (h < 0 || h > cy.height)
-	{
-		if (cap1 == 1 || cap2 == 1)
-			*t = g_t2;
-		else
-			return (-1);
-	}
-	// if (cap1 == 1 && d1 < *t)
-	// 	*t = d1;
-	// if (cap2 == 1 && d2 < *t)
-	// 	*t = d2;
-	return (1);
+	h1 = dot(subvec(p, cy.pos), cy.normal);
+	h2 = dot(subvec(p, cy.pos2), cy.normal);
+	if (h1 <= 0 || h2 >= 0)
+		*t = -1;
 }
 
 double	cylinder_intersect(t_ray ray, t_cy cy)
@@ -105,14 +68,16 @@ double	cylinder_intersect(t_ray ray, t_cy cy)
 		return (-1);
 	g_t1 = (-g_b - sqrt(g_disc)) / g_a;
 	g_t2 = (-g_b + sqrt(g_disc)) / g_a;
-	if (g_t2 < T_MIN)
+	if (g_t1 > 0)
+		limit_cy(ray, cy, &g_t1);
+	if (g_t2 > 0)
+		limit_cy(ray, cy, &g_t2);
+	if (g_t1 < 0 && g_t2 < 0)
 		return (-1);
-	if (g_t1 > T_MIN)
+	if ((g_t1 < g_t2 && g_t1 > 0) || (g_t2 < g_t1 && g_t2 < 0))
 		t = g_t1;
 	else
 		t = g_t2;
-	if (limit_cy(ray, cy, &t) == -1)
-		return (-1);
 	return (t);
 }
 

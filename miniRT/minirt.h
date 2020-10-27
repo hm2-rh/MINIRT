@@ -21,11 +21,16 @@
 # include "libft/libft.h"
 # include "gnl/get_next_line.h"
 
-# define T_MIN 1.0e-5
-# define T_MAX 1.0e100
+# define T_MIN 		1.0e-5
+# define T_MAX 		1.0e100
 
-# define ESC_KEY	53
-# define SP_KEY		49
+# ifdef __APPLE__
+#  define ESC_KEY	53
+#  define SP_KEY	49
+# elif __linux
+#  define ESC_KEY	65307
+#  define SP_KEY	32
+# endif
 
 # define SP 1
 # define PL 2
@@ -134,13 +139,12 @@ typedef	struct	s_cy
 
 typedef	struct	s_img
 {
-	void			*img;
-	char			*addr;
-	int				bpp;
-	int				line_len;
-	int				endian;
+	void		*img;
+	char		*addr;
+	int			bpp;
+	int			line_len;
+	int			endian;
 }				t_img;
-
 
 typedef	struct	s_data
 {
@@ -235,7 +239,7 @@ int				rgb_to_int(t_color c);
 void			print_info_error(char *s);
 void			print_load_error(t_data *data);
 int				check_errors(char **tab);
-void		normal_error(t_vec normal);
+void			normal_error(t_vec normal);
 
 /*
 ** extract data from string
@@ -275,7 +279,7 @@ void			implement_cy(char **tab, t_list **shapes);
 */
 
 int				keys(int key, t_data *data);
-int     		mclose(void *data);
+int				mclose(void *data);
 void			lst_circle(t_list **imgs);
 void			free_tab(char **tab);
 int				tab_len(char **tab);

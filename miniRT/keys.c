@@ -12,10 +12,10 @@
 
 #include "minirt.h"
 
-int     mclose(void *data)
+int		mclose(void *data)
 {
-    (void)data;
-    exit(EXIT_SUCCESS);
+	(void)data;
+	exit(EXIT_SUCCESS);
 }
 
 int		keys(int key, t_data *data)
@@ -27,7 +27,8 @@ int		keys(int key, t_data *data)
 	{
 		data->imgs = data->imgs->next;
 		data->curr_img = data->imgs->content;
-		mlx_put_image_to_window(data->ptr, data->win, data->curr_img->img, 0, 0);
+		mlx_put_image_to_window(data->ptr, data->win,
+								data->curr_img->img, 0, 0);
 	}
 	return (key);
 }
