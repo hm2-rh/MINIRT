@@ -48,9 +48,8 @@ void	free_tab(char **tab)
 	free(tab);
 }
 
-int		is_whitespace(int c)
+void	free_and_exit(char **tab)
 {
-	if (c == ' ' || c == '\t')
-		return (1);
-	return (-1);
+	free_tab(tab);
+	exit(-1);
 }

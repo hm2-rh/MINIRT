@@ -23,9 +23,9 @@ t_vec	ext_vec(char *s)
 	if (tab_len(sub) != 3)
 	{
 		ft_putstr_fd("Error\nWrong VECTOR format\n", 0);
-		free_tab(sub);
-		exit(-1);
+		free_and_exit(sub);
 	}
+	isvalid_vec(sub);
 	vec.x = ft_atolf(sub[0]);
 	vec.y = ft_atolf(sub[1]);
 	vec.z = ft_atolf(sub[2]);
@@ -44,9 +44,9 @@ t_color	ext_color(char *s)
 	if (tab_len(sub) != 3)
 	{
 		ft_putstr_fd("Error\nWrong COLOR format\n", 0);
-		free_tab(sub);
-		exit(-1);
+		free_and_exit(sub);
 	}
+	isvalid_rgb(sub);
 	color.r = ft_atoi(sub[0]);
 	color.g = ft_atoi(sub[1]);
 	color.b = ft_atoi(sub[2]);
@@ -55,7 +55,7 @@ t_color	ext_color(char *s)
 		color.b < 0 || color.b > 255)
 	{
 		ft_putstr_fd("Error\nWrong RGB values\n", 0);
-		exit(-1);
+		free_and_exit(sub);
 	}
 	free_tab(sub);
 	return (color);
@@ -72,12 +72,9 @@ t_vec	ext_color_ratio(char *s)
 	if (tab_len(sub) != 3)
 	{
 		ft_putstr_fd("Error\nWrong COLOR format\n", 0);
-		free_tab(sub);
-		exit(-1);
+		free_and_exit(sub);
 	}
-	/*
-	** check for doubles in RGB values
-	*/
+	isvalid_rgb(sub);
 	color.x = ft_atoi(sub[0]) / 255.0;
 	color.y = ft_atoi(sub[1]) / 255.0;
 	color.z = ft_atoi(sub[2]) / 255.0;
@@ -86,7 +83,7 @@ t_vec	ext_color_ratio(char *s)
 		color.z * 255.0 < 0 || color.z * 255.0 > 255)
 	{
 		ft_putstr_fd("Error\nWrong RGB values\n", 0);
-		exit(-1);
+		free_and_exit(sub);
 	}
 	free_tab(sub);
 	return (color);

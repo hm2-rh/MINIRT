@@ -21,7 +21,7 @@ void	start(t_data *data)
 	data->curr_img = (t_img *)(data->imgs->content);
 	lst_circle(&data->imgs);
 	data->win = mlx_new_window(data->ptr, data->res.w, data->res.h,
-								"RayTracer");
+								"mini RayTracer");
 }
 
 int		open_file(char *s)
@@ -57,7 +57,7 @@ int		main(int ac, char **av)
 			return (-1);
 		read_fd(fd, &data);
 		close(fd);
-		print_load_error(&data);
+		load_error_msg(&data);
 		data.bmp_name = av[1];
 		start(&data);
 		mlx_put_image_to_window(data.ptr, data.win, data.curr_img->img, 0, 0);
@@ -66,6 +66,6 @@ int		main(int ac, char **av)
 		mlx_loop(data.ptr);
 		return (0);
 	}
-	ft_putstr_fd("Error\nUsage: ./minirt file_name.rt\n", 0);
+	ft_putstr_fd("\033[37mError\nUsage: ./minirt file_name.rt\n", 1);
 	return (-1);
 }

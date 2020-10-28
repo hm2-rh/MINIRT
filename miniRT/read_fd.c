@@ -37,6 +37,11 @@ char	*rm_tabs(char *line)
 
 void	implement(t_data *data, char *line)
 {
+	int i;
+
+	i = 0;
+	while (is_whitespace(*line) == 1)
+		line += 1;
 	if ((line[0] == 's' && line[1] == 'p' && is_whitespace(line[2]) == 1) ||
 		(line[0] == 'p' && line[1] == 'l' && is_whitespace(line[2]) == 1) ||
 		(line[0] == 't' && line[1] == 'r' && is_whitespace(line[2]) == 1) ||

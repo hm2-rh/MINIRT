@@ -236,10 +236,13 @@ int				rgb_to_int(t_color c);
 ** errors
 */
 
-void			print_info_error(char *s);
-void			print_load_error(t_data *data);
+void			given_info_error(char *s);
+void			load_error_msg(t_data *data);
 int				check_errors(char **tab);
 void			normal_error(t_vec normal);
+void			tab_len_error(char **tab, int num);
+void			ratio_error(char **tab, int i);
+void			double_error_msg(char **tab, int i);
 
 /*
 ** extract data from string
@@ -281,9 +284,15 @@ void			implement_cy(char **tab, t_list **shapes);
 int				keys(int key, t_data *data);
 int				mclose(void *data);
 void			lst_circle(t_list **imgs);
-void			free_tab(char **tab);
 int				tab_len(char **tab);
+void			free_tab(char **tab);
+void			free_and_exit(char **tab);
+
 int				is_whitespace(int c);
+int				is_double(char *s);
+int				is_int(char *s);
+void			isvalid_rgb(char **sub);
+void			isvalid_vec(char **sub);
 
 /*
 ** vec math

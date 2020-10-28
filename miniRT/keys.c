@@ -20,7 +20,6 @@ int		mclose(void *data)
 
 int		keys(int key, t_data *data)
 {
-	printf("%d\n", key);
 	if (key == ESC_KEY)
 		mclose(data);
 	if (key == SP_KEY)

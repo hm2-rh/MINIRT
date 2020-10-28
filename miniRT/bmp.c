@@ -57,7 +57,7 @@ int		save_image(t_data *data, int x, int y)
 	int		fd;
 	char	*add;
 
-	ft_putstr_fd("Saving...\n", 0);
+	ft_putstr_fd("Saving...\n", 1);
 	add = (char *)data->curr_img->addr;
 	set_bmp(&bmp, data);
 	data->bmp_name = "image.bmp";
@@ -75,6 +75,6 @@ int		save_image(t_data *data, int x, int y)
 		y--;
 	}
 	close(fd);
-	ft_putstr_fd("\033[32mDone!\n", 0);
+	ft_putstr_fd("\033[32mDone!\n", 1);
 	return (0);
 }

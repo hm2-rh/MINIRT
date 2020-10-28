@@ -94,5 +94,7 @@ void	closest_cy(t_data *data, t_vec *inter_pt, t_vec *n, t_vec *col)
 		data->t_min = t;
 		*inter_pt = addvec(data->ray.start, mulvec(t, data->ray.dir));
 		*n = get_normal(*inter_pt, cy);
+		if (t == g_t2)
+			*n = invec(*n);
 	}
 }

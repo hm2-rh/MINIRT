@@ -17,19 +17,24 @@ void	implement_res(char *line, t_res *res)
 	char **tab;
 
 	tab = ft_split(line, ' ');
-	if (tab_len(tab) != 3)
+	tab_len_error(tab, 3);
+	if (is_int(tab[1]) == -1 || is_int(tab[2]) == -1)
 	{
-		print_info_error(tab[0]);
-		free_tab(tab);
-		exit(-1);
+		ft_putstr_fd("Error\nWrong RES values\n", 1);
+		free_and_exit(tab);
 	}
 	res->w = ft_atoi(tab[1]);
 	res->h = ft_atoi(tab[2]);
+	if (res->w < 0 || res->h < 0)
+	{
+		ft_putstr_fd("Error\nNegative RES values\n", 1);
+		free_and_exit(tab);
+	}
 	res->loaded++;
 	if (res->loaded > 0)
 	{
-		ft_putstr_fd("Error\nmultiple resolutions..\n", 0);
-		exit(-1);
+		ft_putstr_fd("Error\nmultiple resolutions..\n", 1);
+		free_and_exit(tab);
 	}
 	free_tab(tab);
 }
@@ -39,24 +44,20 @@ void	implement_amb(char *line, t_amb *amb)
 	char **tab;
 
 	tab = ft_split(line, ' ');
-	if (tab_len(tab) != 3)
-	{
-		print_info_error(tab[0]);
-		free_tab(tab);
-		exit(-1);
-	}
+	tab_len_error(tab, 3);
+	ratio_error(tab, 1);
 	amb->ratio = ft_atolf(tab[1]);
-	if (amb->ratio > 1 || amb->ratio < 0)
+	if (amb->ratio < 0 || amb->ratio > 1)
 	{
-		ft_putstr_fd("Error\nRatio should be between 0 and 1..\n", 0);
-		exit(-1);
+		ft_putstr_fd("Error\nambient ratio not in range [0.0, 1.0]..\n", 1);
+		free_and_exit(tab);
 	}
 	amb->color = ext_color(tab[2]);
 	amb->loaded++;
 	if (amb->loaded > 0)
 	{
-		ft_putstr_fd("Error\nmultiple ambient lights..\n", 0);
-		exit(-1);
+		ft_putstr_fd("Error\nmultiple ambient lights..\n", 1);
+		free_and_exit(tab);
 	}
 	free_tab(tab);
 }
@@ -68,18 +69,14 @@ void	implement_lights(char *line, t_list **lights)
 
 	light = malloc(sizeof(t_light));
 	tab = ft_split(line, ' ');
-	if (tab_len(tab) != 4)
-	{
-		print_info_error(tab[0]);
-		free_tab(tab);
-		exit(-1);
-	}
+	tab_len_error(tab, 4);
 	light->pos = ext_vec(tab[1]);
+	ratio_error(tab, 2);
 	light->ratio = ft_atolf(tab[2]);
-	if (light->ratio > 1 || light->ratio < 0)
+	if (light->ratio < 0 || light->ratio > 1)
 	{
-		ft_putstr_fd("Error\nRatio should be between 0 and 1..\n", 0);
-		exit(-1);
+		ft_putstr_fd("Error\nlight ratio not in range [0.0, 1.0]..\n", 1);
+		free_and_exit(tab);
 	}
 	light->color = ext_color(tab[3]);
 	ft_lstadd_back(lights, ft_lstnew(light));
@@ -94,12 +91,7 @@ void	implement_cameras(char *line, t_list **cams)
 
 	cam = malloc(sizeof(t_cam));
 	tab = ft_split(line, ' ');
-	if (tab_len(tab) != 4)
-	{
-		print_info_error(tab[0]);
-		free_tab(tab);
-		exit(-1);
-	}
+	tab_len_error(tab, 4);
 	down_guide = (t_vec){0, 1, 0};
 	cam->pos = ext_vec(tab[1]);
 	cam->dir = ext_vec(tab[2]);
@@ -121,10 +113,7 @@ void	implement_shapes(char *line, t_list **shapes)
 
 	tab = ft_split(line, ' ');
 	if (check_errors(tab) == 1)
-	{
-		free_tab(tab);
-		exit(-1);
-	}
+		free_and_exit(tab);
 	if (line[0] == 's' && line[1] == 'p')
 		implement_sp(tab, shapes);
 	if (line[0] == 'p' && line[1] == 'l')

@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-void	ft_free(char **s)
+static	void	ft_free(char **s)
 {
 	free(*s);
 	*s = NULL;
