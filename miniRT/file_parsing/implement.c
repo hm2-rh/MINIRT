@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../minirt.h"
 
 void	implement_res(char *line, t_res *res)
 {
@@ -25,11 +25,7 @@ void	implement_res(char *line, t_res *res)
 	}
 	res->w = ft_atoi(tab[1]);
 	res->h = ft_atoi(tab[2]);
-	if (res->w < 0 || res->h < 0)
-	{
-		ft_putstr_fd("Error\nNegative RES values\n", 1);
-		free_and_exit(tab);
-	}
+	check_res_values(res, tab);
 	res->loaded++;
 	if (res->loaded > 0)
 	{
@@ -97,7 +93,9 @@ void	implement_cameras(char *line, t_list **cams)
 	cam->dir = ext_vec(tab[2]);
 	normal_error(cam->dir);
 	cam->dir = normalize(cam->dir);
+	double_error_msg(tab, 3);
 	cam->fov = ft_atolf(tab[3]);
+	negative_fov(tab, cam->fov);
 	if (vec_cmp(cam->dir, down_guide) == 1 ||
 		vec_cmp(cam->dir, invec(down_guide)) == 1)
 		down_guide = (t_vec){0, 0, 1};

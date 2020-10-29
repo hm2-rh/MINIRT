@@ -243,6 +243,8 @@ void			normal_error(t_vec normal);
 void			tab_len_error(char **tab, int num);
 void			ratio_error(char **tab, int i);
 void			double_error_msg(char **tab, int i);
+void			check_res_values(t_res *res, char **tab);
+void			negative_fov(char **tab, double fov);
 
 /*
 ** extract data from string

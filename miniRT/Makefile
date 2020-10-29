@@ -13,25 +13,20 @@
 NAME = minirt
 LIBFT = libft/libft.a
 MAKE_LIBFT = make -C libft/ && make bonus -C libft/
-CC = clang -Wall -Wextra -Werror #-g -fsanitize=address
+CC = clang -Wall -Wextra -Werror
 MLX = -lmlx -framework OpenGL -framework AppKit
-# MLX = -lmlx -lm -lX11 -lXext
+UNAME = $(shell uname)
+ifeq ($(UNAME), Linux)
+MLX = -lmlx -lm -lX11 -lXext
+endif
 SRCS =	main.c \
-		calc_color.c \
-		implement.c \
-		implement_shapes.c \
-		ext_funcs.c \
-		utils.c \
-		utils2.c \
-		keys.c \
-		intersections/*.c \
-		render_scenes.c \
-		read_fd.c \
-		vector_math.c \
-		vector_math2.c \
-		errors.c \
-		errors2.c \
+		file_parsing/*.c \
 		gnl/get_next_line.c \
+		rendering/*.c \
+		intersections/*.c \
+		utils/*.c \
+		errors/*.c \
+		keys.c \
 		bmp.c
 		
 OBJS = *.o

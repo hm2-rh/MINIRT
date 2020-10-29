@@ -14,8 +14,8 @@
 
 void	set_bmp(t_bmp *bmp, t_data *data)
 {
-	bmp->type[0] = 0x42;
-	bmp->type[1] = 0x4D;
+	bmp->type[0] = 'B';
+	bmp->type[1] = 'M';
 	bmp->size = 54 + data->res.w * data->res.h * 3;
 	bmp->reserve = 0;
 	bmp->offset = 54;

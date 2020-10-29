@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../minirt.h"
 
 void	ratio_error(char **tab, int i)
 {
@@ -42,6 +42,30 @@ void	double_error_msg(char **tab, int i)
 		ft_putstr_fd(tab[0], 1);
 		ft_putstr_fd(": ", 1);
 		ft_putstr_fd(tab[i], 1);
+		ft_putstr_fd("\n", 1);
+		free_and_exit(tab);
+	}
+}
+
+void	check_res_values(t_res *res, char **tab)
+{
+	if (res->w < 0 || res->h < 0)
+	{
+		ft_putstr_fd("Error\nNegative RES values\n", 1);
+		free_and_exit(tab);
+	}
+	if (res->w > 2560)
+		res->w = 2560;
+	if (res->h > 1440)
+		res->h = 1440;
+}
+
+void	negative_fov(char **tab, double fov)
+{
+	if (fov < 0)
+	{
+		ft_putstr_fd("Error\nnegative FOV: ", 1);
+		ft_putstr_fd(tab[3], 1);
 		ft_putstr_fd("\n", 1);
 		free_and_exit(tab);
 	}
