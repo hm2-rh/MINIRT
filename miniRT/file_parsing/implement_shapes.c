@@ -21,6 +21,7 @@ void	implement_sp(char **tab, t_list **shapes)
 	sp->center = ext_vec(tab[1]);
 	double_error_msg(tab, 2);
 	sp->radius = ft_atolf(tab[2]) / 2.0;
+	neg_dist_error(tab, sp->radius, 2);
 	sp->color = ext_color_ratio(tab[3]);
 	ft_lstadd_back(shapes, ft_lstnew(sp));
 }
@@ -66,8 +67,10 @@ void	implement_cy(char **tab, t_list **shapes)
 	cy->normal = normalize(cy->normal);
 	double_error_msg(tab, 3);
 	cy->radius = ft_atolf(tab[3]) / 2.0;
+	neg_dist_error(tab, cy->radius, 3);
 	double_error_msg(tab, 4);
 	cy->height = ft_atolf(tab[4]);
+	neg_dist_error(tab, cy->height, 4);
 	cy->color = ext_color_ratio(tab[5]);
 	cy->pos2 = addvec(cy->pos, mulvec(cy->height, cy->normal));
 	ft_lstadd_back(shapes, ft_lstnew(cy));
@@ -93,6 +96,7 @@ void	implement_sq(char **tab, t_list **shapes)
 	sq->v = cross(sq->normal, sq->u);
 	double_error_msg(tab, 3);
 	sq->side = ft_atolf(tab[3]);
+	neg_dist_error(tab, sq->side, 3);
 	sq->color = ext_color_ratio(tab[4]);
 	ft_lstadd_back(shapes, ft_lstnew(sq));
 }

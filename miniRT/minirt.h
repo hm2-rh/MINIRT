@@ -71,7 +71,7 @@ typedef	struct	s_cam
 	t_vec		pos;
 	t_vec		dir;
 	t_vec		right;
-	t_vec		down;
+	t_vec		up;
 	double		fov;
 }				t_cam;
 
@@ -245,6 +245,7 @@ void			ratio_error(char **tab, int i);
 void			double_error_msg(char **tab, int i);
 void			check_res_values(t_res *res, char **tab);
 void			negative_fov(char **tab, double fov);
+void			neg_dist_error(char **tab, double d, int i);
 
 /*
 ** extract data from string

@@ -100,7 +100,7 @@ void	implement_cameras(char *line, t_list **cams)
 		vec_cmp(cam->dir, invec(down_guide)) == 1)
 		down_guide = (t_vec){0, 0, 1};
 	cam->right = cross(down_guide, cam->dir);
-	cam->down = cross(cam->dir, cam->right);
+	cam->up = cross(cam->right, cam->dir);
 	ft_lstadd_back(cams, ft_lstnew(cam));
 	free_tab(tab);
 }

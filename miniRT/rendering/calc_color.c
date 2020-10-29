@@ -87,7 +87,7 @@ t_color	calc_color(t_data *data, double px, double py)
 
 	col = (t_color){0, 0, 0};
 	data->ray.dir = addvec(data->curr_cam->dir, addvec(
-		mulvec(px, data->curr_cam->right), mulvec(py, data->curr_cam->down)));
+		mulvec(px, data->curr_cam->right), mulvec(py, data->curr_cam->up)));
 	data->ray.dir = normalize(data->ray.dir);
 	data->hit = first_inter(data, &data->hit_pt, &data->hit_normal,
 							&data->hit_color);

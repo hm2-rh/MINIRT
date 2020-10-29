@@ -69,3 +69,16 @@ void	tab_len_error(char **tab, int num)
 		exit(-1);
 	}
 }
+
+void	neg_dist_error(char **tab, double d, int i)
+{
+	if (d < 0)
+	{
+		ft_putstr_fd("Error\nNegative distance at ", 1);
+		ft_putstr_fd(tab[0], 1);
+		ft_putstr_fd(": ", 1);
+		ft_putstr_fd(tab[i], 1);
+		ft_putstr_fd("\n", 1);
+		free_and_exit(tab);
+	}
+}
