@@ -18,9 +18,11 @@ double	plane_intersect(t_ray ray, t_plane pl)
 	double t;
 
 	denom = dot(ray.dir, pl.normal);
-	if (denom >= 0)
+	if (denom == 0)
 		return (-1);
 	t = dot(subvec(pl.ref, ray.start), pl.normal) / denom;
+	if (t < T_MIN)
+		return (-1);
 	return (t);
 }
 
@@ -33,9 +35,11 @@ void	closest_pl(t_data *data, t_vec *inter_pt, t_vec *n, t_vec *col)
 	t = plane_intersect(data->ray, pl);
 	if (t != -1 && t < data->t_min)
 	{
-		*col = pl.color;
 		data->t_min = t;
+		*col = pl.color;
 		*inter_pt = addvec(data->ray.start, mulvec(t, data->ray.dir));
 		*n = pl.normal;
+		if (dot(*n, data->ray.dir) > 0)
+			*n = invec(*n);
 	}
 }

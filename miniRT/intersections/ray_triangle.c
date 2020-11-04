@@ -53,7 +53,7 @@ void	closest_tr(t_data *data, t_vec *inter_pt, t_vec *n, t_vec *col)
 		data->t_min = t;
 		*inter_pt = addvec(data->ray.start, mulvec(t, data->ray.dir));
 		*n = normalize(cross(tr.p0p1, tr.p0p2));
-		if (n->z > 0)
+		if (dot(*n, data->ray.dir) > 0)
 			*n = invec(*n);
 	}
 }

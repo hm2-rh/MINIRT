@@ -51,5 +51,7 @@ void	closest_sq(t_data *data, t_vec *inter_pt, t_vec *n, t_vec *col)
 		*col = sq.color;
 		*inter_pt = addvec(data->ray.start, mulvec(t, data->ray.dir));
 		*n = sq.normal;
+		if (dot(*n, data->ray.dir) > 0)
+			*n = invec(*n);
 	}
 }

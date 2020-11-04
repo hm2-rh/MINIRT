@@ -88,8 +88,6 @@ void	implement_sq(char **tab, t_list **shapes)
 	sq->normal = ext_vec(tab[2]);
 	normal_error(sq->normal);
 	sq->normal = normalize(sq->normal);
-	if (sq->normal.z > 0)
-		sq->normal = invec(sq->normal);
 	if (vec_cmp(up, sq->normal) == 1 || vec_cmp(sq->normal, invec(up)) == 1)
 		up = (t_vec){0, 0, 1};
 	sq->u = cross(up, sq->normal);
