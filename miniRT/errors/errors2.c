@@ -6,7 +6,7 @@
 /*   By: hrhirha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 10:42:40 by hrhirha           #+#    #+#             */
-/*   Updated: 2020/10/28 10:42:42 by hrhirha          ###   ########.fr       */
+/*   Updated: 2020/11/04 12:41:05 by hrhirha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,21 @@ void	double_error_msg(char **tab, int i)
 	}
 }
 
-void	check_res_values(t_res *res, char **tab)
+void	check_res_values(t_data *data, t_res *res, char **tab)
 {
+	int	wmax;
+	int	hmax;
+
 	if (res->w < 0 || res->h < 0)
 	{
 		ft_putstr_fd("Error\nNegative RES values\n", 1);
 		free_and_exit(tab);
 	}
-	if (res->w > 2560)
-		res->w = 2560;
-	if (res->h > 1440)
-		res->h = 1440;
+	mlx_get_screen_size(data->ptr, &wmax, &hmax);
+	if (res->w > wmax)
+		res->w = wmax;
+	if (res->h > hmax)
+		res->h = hmax;
 }
 
 void	negative_fov(char **tab, double fov)

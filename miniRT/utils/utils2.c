@@ -83,7 +83,9 @@ void	isvalid_vec(char **sub)
 	{
 		if (is_double(sub[i]) == -1)
 		{
-			ft_putstr_fd("Error\nWrong VECTOR values\n", 0);
+			ft_putstr_fd("Error\nWrong VECTOR values: ", 0);
+			ft_putstr_fd(sub[i], 1);
+			ft_putstr_fd("\n", 1);
 			free_tab(sub);
 			exit(-1);
 		}

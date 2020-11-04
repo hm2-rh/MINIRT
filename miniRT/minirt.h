@@ -17,7 +17,7 @@
 # include <fcntl.h>
 # include <math.h>
 # include <stdlib.h>
-# include <mlx.h>
+# include "minilibx_mms_20200219/mlx.h"
 # include "libft/libft.h"
 # include "gnl/get_next_line.h"
 
@@ -243,7 +243,7 @@ void			normal_error(t_vec normal);
 void			tab_len_error(char **tab, int num);
 void			ratio_error(char **tab, int i);
 void			double_error_msg(char **tab, int i);
-void			check_res_values(t_res *res, char **tab);
+void			check_res_values(t_data *data, t_res *res, char **tab);
 void			negative_fov(char **tab, double fov);
 void			neg_dist_error(char **tab, double d, int i);
 
@@ -259,7 +259,7 @@ t_vec			ext_color_ratio(char *s);
 ** implement res and ambient
 */
 
-void			implement_res(char *line, t_res *res);
+void			implement_res(t_data *data, char *line, t_res *res);
 void			implement_amb(char *line, t_amb *amb);
 
 /*

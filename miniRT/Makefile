@@ -12,12 +12,14 @@
 
 NAME = minirt
 LIBFT = libft/libft.a
+LIBMLX = libmlx.dylib
 MAKE_LIBFT = make -C libft/ && make bonus -C libft/
+MAKE_MLX = make -C minilibx_mms_20200219/
 CC = clang -Wall -Wextra -Werror
-MLX = -lmlx -framework OpenGL -framework AppKit
+MLX = $(LIBMLX) -framework OpenGL -framework AppKit
 UNAME = $(shell uname)
 ifeq ($(UNAME), Linux)
-MLX = -lmlx -lm -lX11 -lXext
+MLX = $(LIBMLX) -lm -lX11 -lXext
 endif
 SRCS =	main.c \
 		file_parsing/*.c \
@@ -34,19 +36,22 @@ OBJS = *.o
 all : $(NAME)
 
 $(NAME) : $(OBJS)
-	@$(MAKE_LIBFT)
-	@$(CC) $(OBJS) $(LIBFT) $(MLX) -o $(NAME)
+	$(MAKE_LIBFT)
+	$(MAKE_MLX)
+	mv minilibx_mms_20200219/libmlx.dylib ./$(LIBMLX)
+	$(CC) $(OBJS) $(LIBFT) $(MLX) -o $(NAME)
 
 $(OBJS) : $(SRCS)
-	@$(CC) -c $(SRCS)
+	$(CC) -c $(SRCS)
 
 clean :
-	@make clean -C libft/
-	@rm -rf *.o
+	make clean -C libft/
+	make clean -C minilibx_mms_20200219/
+	rm -rf *.o
 
 fclean : clean
-	@make fclean -C libft/
-	@rm -rf $(NAME)
-	@rm -rf $(LIBRT)
+	make fclean -C libft/
+	rm -rf $(NAME)
+	rm -rf libmlx.dylib
 
 re : fclean $(NAME)

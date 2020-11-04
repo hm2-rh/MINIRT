@@ -49,7 +49,7 @@ void	implement(t_data *data, char *line)
 		(line[0] == 'c' && line[1] == 'y' && is_whitespace(line[2]) == 1))
 		implement_shapes(line, &data->shapes);
 	if (line[0] == 'R' && is_whitespace(line[1]) == 1)
-		implement_res(line, &data->res);
+		implement_res(data, line, &data->res);
 	if (line[0] == 'A' && is_whitespace(line[1]) == 1)
 		implement_amb(line, &data->amb);
 	if (line[0] == 'c' && is_whitespace(line[1]) == 1)

@@ -6,13 +6,13 @@
 /*   By: hrhirha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/23 09:53:26 by hrhirha           #+#    #+#             */
-/*   Updated: 2020/04/23 09:53:30 by hrhirha          ###   ########.fr       */
+/*   Updated: 2020/11/04 12:35:50 by hrhirha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minirt.h"
 
-void	implement_res(char *line, t_res *res)
+void	implement_res(t_data *data, char *line, t_res *res)
 {
 	char **tab;
 
@@ -25,7 +25,7 @@ void	implement_res(char *line, t_res *res)
 	}
 	res->w = ft_atoi(tab[1]);
 	res->h = ft_atoi(tab[2]);
-	check_res_values(res, tab);
+	check_res_values(data, res, tab);
 	res->loaded++;
 	if (res->loaded > 0)
 	{
