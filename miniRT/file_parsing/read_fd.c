@@ -38,24 +38,35 @@ char	*rm_tabs(char *line)
 void	implement(t_data *data, char *line)
 {
 	int i;
+	char **tab;
 
 	i = 0;
 	while (is_whitespace(*line) == 1)
 		line += 1;
-	if ((line[0] == 's' && line[1] == 'p' && is_whitespace(line[2]) == 1) ||
-		(line[0] == 'p' && line[1] == 'l' && is_whitespace(line[2]) == 1) ||
-		(line[0] == 't' && line[1] == 'r' && is_whitespace(line[2]) == 1) ||
-		(line[0] == 's' && line[1] == 'q' && is_whitespace(line[2]) == 1) ||
-		(line[0] == 'c' && line[1] == 'y' && is_whitespace(line[2]) == 1))
-		implement_shapes(line, &data->shapes);
-	if (line[0] == 'R' && is_whitespace(line[1]) == 1)
-		implement_res(data, line, &data->res);
-	if (line[0] == 'A' && is_whitespace(line[1]) == 1)
-		implement_amb(line, &data->amb);
-	if (line[0] == 'c' && is_whitespace(line[1]) == 1)
-		implement_cameras(line, &data->cams);
-	if (line[0] == 'l' && is_whitespace(line[1]) == 1)
-		implement_lights(line, &data->lights);
+	tab = ft_split(line, ' ');
+	if (!tab[0] || tab[0][0] == '#')
+		free_tab(tab);
+	else if (ft_strcmp(tab[0], "sp") == 0 ||
+		ft_strcmp(tab[0], "pl") == 0 ||
+		ft_strcmp(tab[0], "tr") == 0 ||
+		ft_strcmp(tab[0], "sq") == 0 ||
+		ft_strcmp(tab[0], "cy") == 0)
+		implement_shapes(tab, &data->shapes);
+	else if (ft_strcmp(tab[0], "R") == 0)
+		implement_res(data, tab, &data->res);
+	else if (ft_strcmp(tab[0], "A") == 0)
+		implement_amb(tab, &data->amb);
+	else if (ft_strcmp(tab[0], "c") == 0)
+		implement_cameras(tab, &data->cams);
+	else if (ft_strcmp(tab[0], "l") == 0)
+		implement_lights(tab, &data->lights);
+	else
+	{
+		ft_putstr_fd("Error\nUnrecognized id: ", 1);
+		ft_putstr_fd(tab[0], 1);
+		ft_putchar_fd('\n', 1);
+		exit(-1);
+	}
 }
 
 void	read_fd(int fd, t_data *data)

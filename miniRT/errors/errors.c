@@ -40,19 +40,19 @@ void	load_error_msg(t_data *data)
 
 int		check_errors(char **tab)
 {
-	if (tab_len(tab) != 4 && ((tab[0][0] == 's' && tab[0][1] == 'p') ||
-							(tab[0][0] == 'p' && tab[0][1] == 'l')))
+	if (tab_len(tab) != 4 && (ft_strcmp(tab[0], "sp") == 0 ||
+							ft_strcmp(tab[0], "pl") == 0))
 	{
 		given_info_error(tab[0]);
 		return (1);
 	}
-	if (tab_len(tab) != 5 && ((tab[0][0] == 't' && tab[0][1] == 'r') ||
-							(tab[0][0] == 's' && tab[0][1] == 'q')))
+	if (tab_len(tab) != 5 && (ft_strcmp(tab[0], "tr") == 0 ||
+							ft_strcmp(tab[0], "sq") == 0))
 	{
 		given_info_error(tab[0]);
 		return (1);
 	}
-	if (tab_len(tab) != 6 && (tab[0][0] == 'c' && tab[0][1] == 'y'))
+	if (tab_len(tab) != 6 && ft_strcmp(tab[0], "cy") == 0)
 	{
 		given_info_error(tab[0]);
 		return (1);

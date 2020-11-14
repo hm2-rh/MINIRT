@@ -12,11 +12,8 @@
 
 #include "../minirt.h"
 
-void	implement_res(t_data *data, char *line, t_res *res)
+void	implement_res(t_data *data, char **tab, t_res *res)
 {
-	char **tab;
-
-	tab = ft_split(line, ' ');
 	tab_len_error(tab, 3);
 	if (is_int(tab[1]) == -1 || is_int(tab[2]) == -1)
 	{
@@ -35,11 +32,8 @@ void	implement_res(t_data *data, char *line, t_res *res)
 	free_tab(tab);
 }
 
-void	implement_amb(char *line, t_amb *amb)
+void	implement_amb(char **tab, t_amb *amb)
 {
-	char **tab;
-
-	tab = ft_split(line, ' ');
 	tab_len_error(tab, 3);
 	ratio_error(tab, 1);
 	amb->ratio = ft_atolf(tab[1]);
@@ -58,13 +52,11 @@ void	implement_amb(char *line, t_amb *amb)
 	free_tab(tab);
 }
 
-void	implement_lights(char *line, t_list **lights)
+void	implement_lights(char **tab, t_list **lights)
 {
-	char	**tab;
 	t_light	*light;
 
 	light = malloc(sizeof(t_light));
-	tab = ft_split(line, ' ');
 	tab_len_error(tab, 4);
 	light->pos = ext_vec(tab[1]);
 	ratio_error(tab, 2);
@@ -79,14 +71,12 @@ void	implement_lights(char *line, t_list **lights)
 	free_tab(tab);
 }
 
-void	implement_cameras(char *line, t_list **cams)
+void	implement_cameras(char **tab, t_list **cams)
 {
-	char	**tab;
 	t_cam	*cam;
 	t_vec	down_guide;
 
 	cam = malloc(sizeof(t_cam));
-	tab = ft_split(line, ' ');
 	tab_len_error(tab, 4);
 	down_guide = (t_vec){0, 1, 0};
 	cam->pos = ext_vec(tab[1]);
@@ -105,22 +95,19 @@ void	implement_cameras(char *line, t_list **cams)
 	free_tab(tab);
 }
 
-void	implement_shapes(char *line, t_list **shapes)
+void	implement_shapes(char **tab, t_list **shapes)
 {
-	char **tab;
-
-	tab = ft_split(line, ' ');
 	if (check_errors(tab) == 1)
 		free_and_exit(tab);
-	if (line[0] == 's' && line[1] == 'p')
+	if (ft_strcmp(tab[0], "sp") == 0)
 		implement_sp(tab, shapes);
-	if (line[0] == 'p' && line[1] == 'l')
+	else if (ft_strcmp(tab[0], "pl") == 0)
 		implement_pl(tab, shapes);
-	if (line[0] == 't' && line[1] == 'r')
+	else if (ft_strcmp(tab[0], "tr") == 0)
 		implement_tr(tab, shapes);
-	if (line[0] == 'c' && line[1] == 'y')
+	else if (ft_strcmp(tab[0], "cy") == 0)
 		implement_cy(tab, shapes);
-	if (line[0] == 's' && line[1] == 'q')
+	else if (ft_strcmp(tab[0], "sq") == 0)
 		implement_sq(tab, shapes);
 	free_tab(tab);
 }

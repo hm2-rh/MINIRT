@@ -43,13 +43,28 @@ int		open_file(char *s)
 	return (fd);
 }
 
+int		check_save(t_data *data, int ac, char **av)
+{
+	if (ac == 3)
+	{
+		if (ft_strncmp(av[2], "--save", 7) == 0)
+			data->save = 1;
+		else
+		{
+			ft_putstr_fd("Usage: ./minirt scene.rt [--save]\n", 1);
+			return (-1);
+		}
+	}
+	return (0);
+}
+
 int		main(int ac, char **av)
 {
 	t_data	data;
 	int		fd;
 
-	if (ac == 3 && ft_strncmp(av[2], "--save", 7) == 0)
-		data.save = 1;
+	if (check_save(&data, ac, av) == -1)
+		return (-1);
 	if (ac > 1 && ac <= 3)
 	{
 		fd = open_file(av[1]);
@@ -66,6 +81,7 @@ int		main(int ac, char **av)
 		mlx_loop(data.ptr);
 		return (0);
 	}
-	ft_putstr_fd("\033[37mError\nUsage: ./minirt file_name.rt\n", 1);
+	ft_putstr_fd("Usage: ./minirt scene.rt [--save]\n\
+In case of multi cameras, press SPACE to switch between'em\n", 1);
 	return (-1);
 }

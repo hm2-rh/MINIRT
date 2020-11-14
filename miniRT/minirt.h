@@ -24,19 +24,14 @@
 # define T_MIN 		1.0e-5
 # define T_MAX 		1.0e100
 
-# ifdef __APPLE__
-#  define ESC_KEY	53
-#  define SP_KEY	49
-# elif __linux
-#  define ESC_KEY	65307
-#  define SP_KEY	32
-# endif
+# define ESC_KEY	53
+# define SP_KEY		49
 
-# define SP 1
-# define PL 2
-# define TR 3
-# define SQ 4
-# define CY 5
+# define SP			1
+# define PL			2
+# define TR			3
+# define SQ			4
+# define CY			5
 
 typedef	struct	s_vec
 {
@@ -259,21 +254,21 @@ t_vec			ext_color_ratio(char *s);
 ** implement res and ambient
 */
 
-void			implement_res(t_data *data, char *line, t_res *res);
-void			implement_amb(char *line, t_amb *amb);
+void			implement_res(t_data *data, char **tab, t_res *res);
+void			implement_amb(char **tab, t_amb *amb);
 
 /*
 ** implement lights and camera
 */
 
-void			implement_lights(char *line, t_list **lights);
-void			implement_cameras(char *line, t_list **cams);
+void			implement_lights(char **tab, t_list **lights);
+void			implement_cameras(char **tab, t_list **cams);
 
 /*
 ** implement shapes
 */
 
-void			implement_shapes(char *line, t_list **shapes);
+void			implement_shapes(char **tab, t_list **shapes);
 void			implement_sp(char **tab, t_list **shapes);
 void			implement_pl(char **tab, t_list **shapes);
 void			implement_tr(char **tab, t_list **shapes);

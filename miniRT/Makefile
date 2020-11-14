@@ -10,17 +10,13 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = minirt
+NAME = miniRT
 LIBFT = libft/libft.a
 LIBMLX = libmlx.dylib
 MAKE_LIBFT = make -C libft/ && make bonus -C libft/
 MAKE_MLX = make -C minilibx_mms_20200219/
 CC = clang -Wall -Wextra -Werror
 MLX = $(LIBMLX) -framework OpenGL -framework AppKit
-UNAME = $(shell uname)
-ifeq ($(UNAME), Linux)
-MLX = $(LIBMLX) -lm -lX11 -lXext
-endif
 SRCS =	main.c \
 		file_parsing/*.c \
 		gnl/get_next_line.c \
@@ -53,5 +49,8 @@ fclean : clean
 	make fclean -C libft/
 	rm -rf $(NAME)
 	rm -rf libmlx.dylib
+
+norme :
+	norminette $(SRCS) minirt.h gnl/*.h libft/*.c libft/*.h
 
 re : fclean $(NAME)

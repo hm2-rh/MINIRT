@@ -6,7 +6,7 @@
 /*   By: hrhirha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/23 09:52:26 by hrhirha           #+#    #+#             */
-/*   Updated: 2020/04/23 09:52:32 by hrhirha          ###   ########.fr       */
+/*   Updated: 2020/11/14 11:05:37 by hrhirha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int		save_image(t_data *data, int x, int y)
 	ft_putstr_fd("Saving...\n", 1);
 	add = (char *)data->curr_img->addr;
 	set_bmp(&bmp, data);
-	data->bmp_name = "image.bmp";
+	data->bmp_name = "scene.bmp";
 	fd = open(data->bmp_name, O_CREAT | O_WRONLY | O_TRUNC, 0666);
 	write_header(fd, &bmp);
 	y = data->res.h - 1;
@@ -75,6 +75,6 @@ int		save_image(t_data *data, int x, int y)
 		y--;
 	}
 	close(fd);
-	ft_putstr_fd("\033[32mDone!\n", 1);
+	ft_putstr_fd("\nImage saved as: scene.bmp\n", 1);
 	return (0);
 }
