@@ -45,7 +45,7 @@ void	closest_sq(t_data *data, t_vec *inter_pt, t_vec *n, t_vec *col)
 
 	sq = *(t_sq *)data->curr_shape;
 	t = square_intersect(data->ray, sq);
-	if (t != -1 && t < data->t_min)
+	if (t != -1 && t < data->t_min - T_MIN)
 	{
 		data->t_min = t;
 		*col = sq.color;

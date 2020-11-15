@@ -33,7 +33,7 @@ void	closest_pl(t_data *data, t_vec *inter_pt, t_vec *n, t_vec *col)
 
 	pl = *(t_plane *)data->curr_shape;
 	t = plane_intersect(data->ray, pl);
-	if (t != -1 && t < data->t_min)
+	if (t != -1 && t < data->t_min - T_MIN)
 	{
 		data->t_min = t;
 		*col = pl.color;
