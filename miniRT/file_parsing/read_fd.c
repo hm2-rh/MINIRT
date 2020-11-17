@@ -37,8 +37,8 @@ char	*rm_tabs(char *line)
 
 void	implement(t_data *data, char *line)
 {
-	int i;
-	char **tab;
+	int		i;
+	char	**tab;
 
 	i = 0;
 	while (is_whitespace(*line) == 1)
@@ -61,12 +61,7 @@ void	implement(t_data *data, char *line)
 	else if (ft_strcmp(tab[0], "l") == 0)
 		implement_lights(tab, &data->lights);
 	else
-	{
-		ft_putstr_fd("Error\nUnrecognized id: ", 1);
-		ft_putstr_fd(tab[0], 1);
-		ft_putchar_fd('\n', 1);
-		exit(-1);
-	}
+		unrecognized_id(tab);
 }
 
 void	read_fd(int fd, t_data *data)

@@ -82,7 +82,7 @@ void	render_scenes(t_data *data)
 		ray_trace(data);
 		if (data->save == 1)
 		{
-			save_image(data, 0, 0);
+			save_image(data);
 			exit(EXIT_SUCCESS);
 		}
 		data->cams = data->cams->next;

@@ -26,7 +26,7 @@ double	sphere_intersect(t_ray ray, t_sp sp)
 	g_rs = subvec(ray.start, sp.center);
 	g_a = dot(ray.dir, ray.dir);
 	g_b = dot(ray.dir, g_rs);
-	g_c = dot(g_rs, g_rs) - (sp.radius * sp.radius);
+	g_c = dot(g_rs, g_rs) - pow(sp.radius, 2);
 	g_disc = g_b * g_b - g_a * g_c;
 	if (g_disc < 0)
 		return (-1);
@@ -34,7 +34,7 @@ double	sphere_intersect(t_ray ray, t_sp sp)
 	g_t2 = (-g_b + sqrt(g_disc)) / g_a;
 	if (g_t2 < T_MIN)
 		return (-1);
-	if (g_t1 > T_MIN)
+	if (g_t1 >= T_MIN)
 		g_t = g_t1;
 	else
 		g_t = g_t2;
@@ -48,11 +48,13 @@ void	closest_sp(t_data *data, t_vec *inter_pt, t_vec *n, t_vec *col)
 
 	sp = *(t_sp *)data->curr_shape;
 	t = sphere_intersect(data->ray, sp);
-	if (t != -1 && t < (data->t_min))
+	if (t != -1 && t < data->t_min - T_MIN)
 	{
 		*col = sp.color;
 		data->t_min = t;
 		*inter_pt = addvec(data->ray.start, mulvec(t, data->ray.dir));
 		*n = normalize(subvec(*inter_pt, sp.center));
+		if (t == g_t2)
+			*n = invec(*n);
 	}
 }

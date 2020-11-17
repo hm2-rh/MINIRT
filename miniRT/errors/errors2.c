@@ -6,7 +6,7 @@
 /*   By: hrhirha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 10:42:40 by hrhirha           #+#    #+#             */
-/*   Updated: 2020/11/04 12:41:05 by hrhirha          ###   ########.fr       */
+/*   Updated: 2020/11/15 13:53:05 by hrhirha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	check_res_values(t_data *data, t_res *res, char **tab)
 	int	wmax;
 	int	hmax;
 
+	// (void)data;
 	if (res->w < 0 || res->h < 0)
 	{
 		ft_putstr_fd("Error\nNegative RES values\n", 1);

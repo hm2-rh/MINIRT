@@ -68,13 +68,13 @@ double	cylinder_intersect(t_ray ray, t_cy cy)
 		return (-1);
 	g_t1 = (-g_b - sqrt(g_disc)) / g_a;
 	g_t2 = (-g_b + sqrt(g_disc)) / g_a;
-	if (g_t1 > 0)
+	if (g_t1 >= T_MIN)
 		limit_cy(ray, cy, &g_t1);
-	if (g_t2 > 0)
+	if (g_t2 >= T_MIN)
 		limit_cy(ray, cy, &g_t2);
-	if (g_t1 < 0 && g_t2 < 0)
+	if (g_t1 < T_MIN && g_t2 < T_MIN)
 		return (-1);
-	if ((g_t1 < g_t2 && g_t1 > 0) || (g_t2 < g_t1 && g_t2 < 0))
+	if ((g_t1 < g_t2 && g_t1 >= T_MIN) || (g_t2 < g_t1 && g_t2 < T_MIN))
 		t = g_t1;
 	else
 		t = g_t2;
@@ -88,7 +88,7 @@ void	closest_cy(t_data *data, t_vec *inter_pt, t_vec *n, t_vec *col)
 
 	cy = *(t_cy *)data->curr_shape;
 	t = cylinder_intersect(data->ray, cy);
-	if (t != -1 && t < (data->t_min))
+	if (t != -1 && t < data->t_min - T_MIN)
 	{
 		*col = cy.color;
 		data->t_min = t;

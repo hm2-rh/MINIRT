@@ -6,7 +6,7 @@
 #    By: hrhirha <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/23 09:54:42 by hrhirha           #+#    #+#              #
-#    Updated: 2020/10/14 14:00:18 by hrhirha          ###   ########.fr        #
+#    Updated: 2020/11/15 13:53:17 by hrhirha          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,8 @@ LIBFT = libft/libft.a
 LIBMLX = libmlx.dylib
 MAKE_LIBFT = make -C libft/ && make bonus -C libft/
 MAKE_MLX = make -C minilibx_mms_20200219/
-CC = clang -Wall -Wextra -Werror
-MLX = $(LIBMLX) -framework OpenGL -framework AppKit
+CC = clang -Wall -Wextra -Werror #-fsanitize=address
+MLX = -lmlx $(LIBMLX) -framework OpenGL -framework AppKit
 SRCS =	main.c \
 		file_parsing/*.c \
 		gnl/get_next_line.c \

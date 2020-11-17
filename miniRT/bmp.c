@@ -6,7 +6,7 @@
 /*   By: hrhirha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/23 09:52:26 by hrhirha           #+#    #+#             */
-/*   Updated: 2020/11/14 11:05:37 by hrhirha          ###   ########.fr       */
+/*   Updated: 2020/11/15 13:51:47 by hrhirha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@ void	set_bmp(t_bmp *bmp, t_data *data)
 	bmp->size = 54 + data->res.w * data->res.h * 3;
 	bmp->reserve = 0;
 	bmp->offset = 54;
-	bmp->dib_size = 40;
-	bmp->width = data->res.w;
-	bmp->height = data->res.h;
+	bmp->header_size = 40;
+	bmp->iwidth = data->res.w;
+	bmp->iheight = data->res.h;
 	bmp->plane = 1;
 	bmp->bpp = 24;
-	bmp->copmression = 0;
-	bmp->array_size = data->res.w * data->res.h * 3;
-	bmp->x_res = 2835;
-	bmp->y_res = 2835;
-	bmp->colour = 0;
-	bmp->imp_colour = 0;
+	bmp->compression = 0;
+	bmp->img_size = 0;
+	bmp->x_res = 0;
+	bmp->y_res = 0;
+	bmp->total_color = 0;
+	bmp->important_color = 0;
 }
 
 void	write_header(const int fd, t_bmp *bmp)
@@ -38,21 +38,23 @@ void	write_header(const int fd, t_bmp *bmp)
 	write(fd, &(bmp->size), 4);
 	write(fd, &(bmp->reserve), 4);
 	write(fd, &(bmp->offset), 4);
-	write(fd, &(bmp->dib_size), 4);
-	write(fd, &(bmp->width), 4);
-	write(fd, &(bmp->height), 4);
+	write(fd, &(bmp->header_size), 4);
+	write(fd, &(bmp->iwidth), 4);
+	write(fd, &(bmp->iheight), 4);
 	write(fd, &(bmp->plane), 2);
 	write(fd, &(bmp->bpp), 2);
-	write(fd, &(bmp->copmression), 4);
-	write(fd, &(bmp->array_size), 4);
+	write(fd, &(bmp->compression), 4);
+	write(fd, &(bmp->img_size), 4);
 	write(fd, &(bmp->x_res), 4);
 	write(fd, &(bmp->y_res), 4);
-	write(fd, &(bmp->colour), 4);
-	write(fd, &(bmp->imp_colour), 4);
+	write(fd, &(bmp->total_color), 4);
+	write(fd, &(bmp->important_color), 4);
 }
 
-int		save_image(t_data *data, int x, int y)
+int		save_image(t_data *data)
 {
+	int		x;
+	int		y;
 	t_bmp	bmp;
 	int		fd;
 	char	*add;
@@ -67,10 +69,9 @@ int		save_image(t_data *data, int x, int y)
 	while (y >= 0)
 	{
 		x = 0;
-		while (x < data->res.w)
+		while (x++ < data->res.w)
 		{
 			write(fd, &(add[(y * data->res.w + x) * 4]), 3);
-			x++;
 		}
 		y--;
 	}

@@ -40,8 +40,8 @@ void	intensity_value(t_data *data, t_vec n, t_vec light_dir,
 
 	d2 = dot(subvec(data->light->pos, data->hit_pt),
 					subvec(data->light->pos, data->hit_pt));
-	if (data->hit_lt != -1 && data->hit_lt > T_MIN
-			&& data->hit_lt * data->hit_lt < d2)
+	if (data->hit_lt != -1 && data->hit_lt >= T_MIN
+			&& data->hit_lt <= sqrt(d2) - T_MIN)
 		;
 	else
 	{
@@ -67,7 +67,7 @@ t_color	calc_intensity(t_data *data, t_vec inter_pt, t_vec n)
 	while (tmp_lt)
 	{
 		data->light = tmp_lt->content;
-		data->ray_lt.start = addvec(inter_pt, mulvec(T_MIN, n));
+		data->ray_lt.start = addvec(inter_pt, mulvec(0.0001, n));
 		data->ray_lt.dir = normalize(subvec(data->light->pos, inter_pt));
 		tmp = data->ray;
 		data->ray = data->ray_lt;
@@ -91,7 +91,7 @@ t_color	calc_color(t_data *data, double px, double py)
 	data->ray.dir = normalize(data->ray.dir);
 	data->hit = first_inter(data, &data->hit_pt, &data->hit_normal,
 							&data->hit_color);
-	if (data->hit != -1 && data->hit > T_MIN)
+	if (data->hit != -1 && data->hit >= T_MIN)
 	{
 		intensity = calc_intensity(data, data->hit_pt, data->hit_normal);
 		range_color(&intensity);

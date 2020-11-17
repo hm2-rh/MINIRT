@@ -6,7 +6,7 @@
 /*   By: hrhirha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/23 09:55:00 by hrhirha           #+#    #+#             */
-/*   Updated: 2020/10/14 12:22:49 by hrhirha          ###   ########.fr       */
+/*   Updated: 2020/11/15 13:53:27 by hrhirha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <math.h>
 # include <stdlib.h>
 # include "minilibx_mms_20200219/mlx.h"
+// # include <mlx.h>
 # include "libft/libft.h"
 # include "gnl/get_next_line.h"
 
@@ -184,23 +185,23 @@ typedef struct	s_bmp
 	int			size;
 	int			reserve;
 	int			offset;
-	int			dib_size;
-	int			width;
-	int			height;
+	int			header_size;
+	int			iwidth;
+	int			iheight;
 	short		plane;
 	short		bpp;
-	int			copmression;
-	int			array_size;
+	int			compression;
+	int			img_size;
 	int			x_res;
 	int			y_res;
-	int			colour;
-	int			imp_colour;
+	int			total_color;
+	int			important_color;
 }				t_bmp;
 
 void			read_fd(int fd, t_data *data);
 void			render_scenes(t_data *data);
 void			ray_trace(t_data *data);
-int				save_image(t_data *data, int x, int y);
+int				save_image(t_data *data);
 
 /*
 ** intersections
@@ -241,6 +242,7 @@ void			double_error_msg(char **tab, int i);
 void			check_res_values(t_data *data, t_res *res, char **tab);
 void			negative_fov(char **tab, double fov);
 void			neg_dist_error(char **tab, double d, int i);
+void			unrecognized_id(char **tab);
 
 /*
 ** extract data from string
