@@ -18,7 +18,6 @@
 # include <math.h>
 # include <stdlib.h>
 # include "minilibx_mms_20200219/mlx.h"
-// # include <mlx.h>
 # include "libft/libft.h"
 # include "gnl/get_next_line.h"
 

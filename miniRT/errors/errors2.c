@@ -52,7 +52,6 @@ void	check_res_values(t_data *data, t_res *res, char **tab)
 	int	wmax;
 	int	hmax;
 
-	// (void)data;
 	if (res->w < 0 || res->h < 0)
 	{
 		ft_putstr_fd("Error\nNegative RES values\n", 1);
