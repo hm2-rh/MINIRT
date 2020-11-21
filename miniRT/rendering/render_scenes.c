@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray_trace.c                                        :+:      :+:    :+:   */
+/*   render_scenes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrhirha <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: hrhirha <hrhirha@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/23 09:55:10 by hrhirha           #+#    #+#             */
-/*   Updated: 2020/04/23 09:55:13 by hrhirha          ###   ########.fr       */
+/*   Created: 2020/11/18 14:25:57 by hrhirha           #+#    #+#             */
+/*   Updated: 2020/11/18 14:27:54 by hrhirha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ void	ray_trace(t_data *data)
 		while (x < data->res.w)
 		{
 			angle = tan((data->curr_cam->fov / 2) * M_PI / 180);
-			px = (2.0 * ((x + .5) / (double)data->res.w) - 1) *
+			px = (2.0 * (((double)x + .5) / (double)data->res.w) - 1) *
 				(angle * data->res.w / data->res.h);
-			py = (2.0 * ((y + .5) / (double)data->res.h) - 1) * angle;
+			py = (2.0 * (((double)y + .5) / (double)data->res.h) - 1) * angle;
 			data->pxl_color = calc_color(data, px, py);
 			pixel_to_img(data, x, y, rgb_to_int(data->pxl_color));
 			x++;

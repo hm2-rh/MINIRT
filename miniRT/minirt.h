@@ -6,7 +6,7 @@
 /*   By: hrhirha <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/23 09:55:00 by hrhirha           #+#    #+#             */
-/*   Updated: 2020/11/15 13:53:27 by hrhirha          ###   ########.fr       */
+/*   Updated: 2020/11/21 11:19:10 by hrhirha          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,21 +180,22 @@ typedef	struct	s_data
 
 typedef struct	s_bmp
 {
-	char		type[2];
-	int			size;
-	int			reserve;
-	int			offset;
-	int			header_size;
-	int			iwidth;
-	int			iheight;
-	short		plane;
-	short		bpp;
-	int			compression;
-	int			img_size;
-	int			x_res;
-	int			y_res;
-	int			total_color;
-	int			important_color;
+	char				type[2];
+	unsigned int		size;
+	unsigned short		reserve1;
+	unsigned short		reserve2;
+	unsigned int		offset;
+	unsigned int		header_size;
+	unsigned int		iwidth;
+	unsigned int		iheight;
+	unsigned short		plane;
+	unsigned short		bpp;
+	unsigned int		compression;
+	unsigned int		img_size;
+	unsigned int		x_res;
+	unsigned int		y_res;
+	unsigned int		total_color;
+	unsigned int		important_color;
 }				t_bmp;
 
 void			read_fd(int fd, t_data *data);
